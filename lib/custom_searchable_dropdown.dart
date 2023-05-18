@@ -26,12 +26,14 @@ class CustomSearchableDropDown<T> extends StatefulWidget {
   final ValueChanged? onChanged;
   final String? Function(String?)? validator;
   final Widget? child;
+  final TextEditingController controller;
 
   CustomSearchableDropDown({
     Key? key,
     required this.items,
     this.initialValue,
     required this.label,
+    required this.controller,
     this.hint = '',
     this.multiSelectTag,
     this.initialIndex,
@@ -59,7 +61,7 @@ class _CustomSearchableDropDownState extends State<CustomSearchableDropDown> {
   String? validationError;
   String? onSelectLabel;
   final searchC = TextEditingController();
-  final selectedValue = TextEditingController();
+  // final selectedValue = TextEditingController();
   List menuData = [];
   List mainDataListGroup = [];
   List newDataList = [];
@@ -134,7 +136,7 @@ class _CustomSearchableDropDownState extends State<CustomSearchableDropDown> {
 // }
   @override
   void dispose() {
-    selectedValue.dispose();
+    widget.controller.dispose();
     super.dispose();
   }
 
@@ -251,7 +253,7 @@ class _CustomSearchableDropDownState extends State<CustomSearchableDropDown> {
                           //       )
                           //     :
                           TextFormField(
-                        controller: selectedValue,
+                        controller: widget.controller,
                         style: TextStyle(color: Colors.black),
                         decoration: InputDecoration(
                           isDense: true,
@@ -452,7 +454,7 @@ class _CustomSearchableDropDownState extends State<CustomSearchableDropDown> {
                               if (menuData[i] == newDataList[index]) {
                                 onSelectLabel =
                                     menuData[i].split('-_-')[0].toString();
-                                selectedValue.text =
+                                widget.controller.text =
                                     menuData[i].split('-_-')[0].toString();
                                 widget.onChanged!(widget.items[i]);
                               }

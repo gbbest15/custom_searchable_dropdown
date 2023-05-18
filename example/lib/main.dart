@@ -55,6 +55,8 @@ class MyHomePage extends StatefulWidget {
 }
 
 class _MyHomePageState extends State<MyHomePage> {
+  final singleSearch = TextEditingController();
+  final multipleSearch = TextEditingController();
   final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
   List? listToSearch = [
     {'name': 'Amir', 'class': 12},
@@ -88,6 +90,7 @@ class _MyHomePageState extends State<MyHomePage> {
               child: Padding(
                 padding: const EdgeInsets.all(8.0),
                 child: CustomSearchableDropDown(
+                  controller: singleSearch,
                   items: listToSearch!,
                   label: 'Select Name',
                   decoration:
@@ -120,6 +123,7 @@ class _MyHomePageState extends State<MyHomePage> {
             Padding(
               padding: const EdgeInsets.all(8.0),
               child: CustomSearchableDropDown(
+                controller: multipleSearch,
                 items: listToSearch!,
                 label: 'Select Name',
                 multiSelectTag: 'Names',
@@ -147,6 +151,7 @@ class _MyHomePageState extends State<MyHomePage> {
             Padding(
               padding: const EdgeInsets.all(8.0),
               child: CustomSearchableDropDown(
+                controller: multipleSearch,
                 items: listToSearch!,
                 label: 'Select Name',
                 multiSelectTag: 'Names',
