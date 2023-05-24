@@ -26,14 +26,14 @@ class CustomSearchableDropDown<T> extends StatefulWidget {
   final ValueChanged? onChanged;
   final String? Function(String?)? validator;
   final Widget? child;
-  final TextEditingController controller;
+  final TextEditingController? controller;
 
   CustomSearchableDropDown({
     Key? key,
     required this.items,
     this.initialValue,
     required this.label,
-    required this.controller,
+    this.controller,
     this.hint = '',
     this.multiSelectTag,
     this.initialIndex,
@@ -136,7 +136,7 @@ class _CustomSearchableDropDownState extends State<CustomSearchableDropDown> {
 // }
   @override
   void dispose() {
-    widget.controller.dispose();
+    widget.controller?.dispose();
     super.dispose();
   }
 
@@ -454,7 +454,7 @@ class _CustomSearchableDropDownState extends State<CustomSearchableDropDown> {
                               if (menuData[i] == newDataList[index]) {
                                 onSelectLabel =
                                     menuData[i].split('-_-')[0].toString();
-                                widget.controller.text =
+                                widget.controller?.text =
                                     menuData[i].split('-_-')[0].toString();
                                 widget.onChanged!(widget.items[i]);
                               }
